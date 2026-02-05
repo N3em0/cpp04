@@ -12,6 +12,10 @@ public:
   ~Cat();
 
   Cat &operator=(Cat const &rhs);
+
+  std::string getType(void) const;
+
+  void makeSound() const;
 };
 
 #endif
