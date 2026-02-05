@@ -1,4 +1,4 @@
-NAME	:= Repetitive_work	
+NAME	:= World_on_fire	
 
 SRC_DIR := src
 BUILD_DIR	:=	.build
@@ -6,16 +6,19 @@ INC_DIR := includes
 
 SRC_FILES		:=	\
 main.cpp \
-ClapTrap.cpp \
-ScavTrap.cpp \
-FragTrap.cpp
+Animal.cpp \
+Cat.cpp \
+Dog.cpp \
+WrongAnimal.cpp \
+WrongCat.cpp \
+Brain.cpp
 
 SRC		:=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ			:=	$(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
 DEP			:=	$(OBJ:%.o=%.d)
 
 CXX			:=	c++
-CXXFLAGS	:=  -Wall -Wextra -Werror -std=c++98 -MMD -MP -g3
+CXXFLAGS	:=  -Wall -Wextra -Werror -std=c++98 -MMD -MP
 INCLUDE		:=	-I$(INC_DIR)
 
 MAKEFLAGS	+=	--no-print-directory
