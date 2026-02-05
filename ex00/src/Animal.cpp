@@ -19,13 +19,17 @@ Animal &Animal::operator=(Animal const &rhs)
 {
   if (this != &rhs)
   {
-    this->type = rhs->type;
+    this->type = rhs.type;
   }
   return (*this);
 }
 
-void Animal::makeSound()
+std::string Animal::getType() const
 {
-  std::cout << "Generic Animal sound." << std::endl;
+  return (this->type);
 }
 
+void Animal::makeSound() const
+{
+  std::cout << this->type << " does generic Animal sound." << std::endl;
+}

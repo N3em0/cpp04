@@ -8,7 +8,9 @@ SRC_FILES		:=	\
 main.cpp \
 Animal.cpp \
 Cat.cpp \
-Dog.cpp
+Dog.cpp \
+WrongAnimal.cpp \
+WrongCat.cpp
 
 SRC		:=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ			:=	$(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
