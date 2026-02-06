@@ -1,5 +1,5 @@
-#include "Animal.hpp"
 #include "Dog.hpp"
+#include "Animal.hpp"
 
 Dog::Dog() : Animal(), _brain(new Brain)
 {
@@ -7,7 +7,8 @@ Dog::Dog() : Animal(), _brain(new Brain)
   std::cout << "Dog default constructor called." << std::endl;
 }
 
-Dog::Dog(Dog const &src) : Animal(src), _brain(src._brain ? new Brain(src._brain) : NULL)
+Dog::Dog(Dog const &src)
+    : Animal(src), _brain(src._brain ? new Brain(*src._brain) : NULL)
 {
   this->type = src.type;
   std::cout << "Dog copy constructor called." << std::endl;
@@ -33,15 +34,9 @@ Dog &Dog::operator=(Dog const &rhs)
   return (*this);
 }
 
-std::string Dog::getType() const
-{
-  return (this->type);
-}
+std::string Dog::getType() const { return (this->type); }
 
-Brain *Dog::getBrain() const
-{
-  return (this->_brain);
-}
+Brain *Dog::getBrain() const { return (this->_brain); }
 
 void Dog::makeSound() const
 {

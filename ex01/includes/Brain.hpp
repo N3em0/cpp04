@@ -1,8 +1,11 @@
+#include <iostream>
+
 #ifndef BRAIN_HPP
 #define BRAIN_HPP
 
-class Brain {
-  public:
+class Brain
+{
+public:
   Brain();
   Brain(Brain const &src);
   ~Brain();
@@ -11,7 +14,6 @@ class Brain {
 
   std::string ideas[100];
   int sharedptr;
-   
 };
 
 #endif
