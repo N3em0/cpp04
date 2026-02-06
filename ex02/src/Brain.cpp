@@ -1,5 +1,5 @@
 #include "Brain.hpp"
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 
 Brain::Brain() : sharedptr(0)
 {
