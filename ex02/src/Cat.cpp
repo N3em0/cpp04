@@ -10,7 +10,7 @@ Cat::Cat() : AAnimal(), _brain(new Brain)
 Cat::Cat(Cat const &src)
     : AAnimal(src), _brain(src._brain ? new Brain(*src._brain) : NULL)
 {
-  this->type = src.type;
+  // this->type = src.type;
   std::cout << "Cat copy constructor called." << std::endl;
 }
 

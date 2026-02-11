@@ -9,7 +9,7 @@ class Ice : public AMateria
 private:
 public:
   Ice();
-  Ice(const Ice &src);
+  Ice(Ice const &src);
   ~Ice();
 
   Ice &operator=(const Ice &rhs);
