@@ -1,8 +1,10 @@
-#include "AMateria.hpp"
-#include "ICharacter.hpp"
 
 #ifndef CURE_HPP
 #define CURE_HPP
+
+#include "AMateria.hpp"
+
+class ICharacter;
 
 class Cure : public AMateria
 {
@@ -13,7 +15,7 @@ public:
 
   Cure &operator=(const Cure &rhs);
 
-  virtual AMateria *clone(); // Trying with different return type than parent
+  virtual AMateria *clone() const; // Trying with different return type than parent
   virtual void use(ICharacter &target);
 };
 

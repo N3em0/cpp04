@@ -1,6 +1,10 @@
 #ifndef ICHARACTER_HPP
 #define ICHARACTER_HPP
 
+#include <iostream>
+
+class AMateria;
+
 class ICharacter
 {
 public:
