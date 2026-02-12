@@ -1,9 +1,10 @@
 #include "Cure.hpp"
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 Cure::Cure() : AMateria("cure")
 {
-  std::cout << "Cure default constructor called." << std::endl;
+  // std::cout << "Cure default constructor called." << std::endl;
 }
 
 // Cure::Cure(std::string const &type) : type(type)
@@ -13,10 +14,13 @@ Cure::Cure() : AMateria("cure")
 
 Cure::Cure(Cure const &src) : AMateria(src)
 {
-  std::cout << "Cure copy constructor called." << std::endl;
+  // std::cout << "Cure copy constructor called." << std::endl;
 }
 
-Cure::~Cure() { std::cout << "Cure destructor called." << std::endl; }
+Cure::~Cure()
+{ 
+  // std::cout << "Cure destructor called." << std::endl;
+}
 
 Cure &Cure::operator=(const Cure &rhs)
 {
@@ -25,16 +29,14 @@ Cure &Cure::operator=(const Cure &rhs)
   return (*this);
 }
 
-AMateria *Cure::clone()
+AMateria *Cure::clone() const
 {
   AMateria *clone = new Cure();
-  return clone;
+  return (clone);
 }
 
 void Cure::use(ICharacter &target)
 {
-  (void)target;
-  std::cout << "* heals no one's wounds *" << std::endl;
-  // to do
+  std::cout << "* heals " << target.getName() << " wounds *" << std::endl;
   return;
 }

@@ -1,9 +1,10 @@
 #include "Ice.hpp"
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 Ice::Ice() : AMateria("ice")
 {
-  std::cout << "Ice default constructor called." << std::endl;
+  // std::cout << "Ice default constructor called." << std::endl;
 }
 
 // Ice::Ice(std::string const &type) : type(type)
@@ -13,10 +14,13 @@ Ice::Ice() : AMateria("ice")
 
 Ice::Ice(Ice const &src) : AMateria(src)
 {
-  std::cout << "Ice copy constructor called." << std::endl;
+  // std::cout << "Ice copy constructor called." << std::endl;
 }
 
-Ice::~Ice() { std::cout << "Ice destructor called." << std::endl; }
+Ice::~Ice() 
+{
+  // std::cout << "Ice destructor called." << std::endl; 
+}
 
 Ice &Ice::operator=(const Ice &rhs)
 {
@@ -25,16 +29,14 @@ Ice &Ice::operator=(const Ice &rhs)
   return (*this);
 }
 
-AMateria *Ice::clone()
+AMateria *Ice::clone() const
 {
   AMateria *clone = new Ice();
-  return clone;
+  return (clone);
 }
 
 void Ice::use(ICharacter &target)
 {
-  (void)target;
-  std::cout << "* shoots an ice bolt at no one ftm *" << std::endl;
-  // to do
+  std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
   return;
 }

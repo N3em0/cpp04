@@ -3,19 +3,22 @@
 #ifndef AMATERIA_HPP
 #define AMATERIA_HPP
 
+class ICharacter;
+
 class AMateria
 {
 protected:
   //[...]
-  const std::string type;
+  std::string type;
 
 public:
   AMateria();
   AMateria(std::string const &type);
+  AMateria(AMateria const &src);
   virtual ~AMateria();
   //[...]
 
-  AMateria &operator=(const AMateria &rhs);
+  AMateria &operator=(AMateria const &rhs);
 
   std::string const &getType() const; // Returns the materia type
   virtual AMateria *clone() const = 0;

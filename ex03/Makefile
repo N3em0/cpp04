@@ -1,4 +1,4 @@
-NAME	:= Abstract_class	
+NAME	:= Materias
 
 SRC_DIR := src
 BUILD_DIR	:=	.build
@@ -6,19 +6,18 @@ INC_DIR := includes
 
 SRC_FILES		:=	\
 main.cpp \
-AAnimal.cpp \
-Cat.cpp \
-Dog.cpp \
-WrongAAnimal.cpp \
-WrongCat.cpp \
-Brain.cpp
+AMateria.cpp \
+Cure.cpp \
+Ice.cpp \
+MateriaSource.cpp \
+Character.cpp
 
 SRC		:=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ			:=	$(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
 DEP			:=	$(OBJ:%.o=%.d)
 
 CXX			:=	c++
-CXXFLAGS	:=  -Wall -Wextra -Werror -std=c++98 -MMD -MP
+CXXFLAGS	:=  -Wall -Wextra -Werror -std=c++98 -MMD -MP -g3
 INCLUDE		:=	-I$(INC_DIR)
 
 MAKEFLAGS	+=	--no-print-directory
