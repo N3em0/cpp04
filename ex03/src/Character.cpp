@@ -37,14 +37,14 @@ Character::~Character()
     if (this->_inventory[i])
     {
       delete this->_inventory[i];
-      this->_inventory[i] = 0;
+      this->_inventory[i] = NULL;
     }
   }
-  for (size_t i = 0; i < 100; i++)
-  {
-    if (Character::voidBank[i] != NULL)
-      delete Character::voidBank[i];
-  }
+  // for (size_t i = 0; i < 100; i++)
+  // {
+  //   if (Character::voidBank[i] != NULL)
+  //     delete Character::voidBank[i];
+  // }
   // std::cout << "Character destructor called." << std::endl;
 }
 
@@ -71,7 +71,8 @@ Character &Character::operator=(Character const &rhs)
 
 AMateria const *Character::getInvMateria(size_t i) const
 {
-  if (i >= 0 && i < 4)
+  // if (i >= 0 && i < 4)
+  if (i < 4)
     return (this->_inventory[i]);
   else
     return (NULL);
@@ -86,14 +87,14 @@ void Character::equip(AMateria *m)
 {
   if (m == NULL)
   {
-    std::cout << "Wrong Materia type or empty Materia : " << &m->getType() << std::endl;
+    std::cout << "Wrong Materia type or empty Materia" << std::endl;
     return ;
   }
   for (size_t i = 0; i < 4; i++)
   {
     if (this->_inventory[i] == m)
     {
-       std::cout << "Materia already equiped" << std::endl;
+      std::cout << "Materia already equiped" << std::endl;
       return ;
     }
     if (this->_inventory[i] == NULL)
@@ -107,14 +108,16 @@ void Character::equip(AMateria *m)
       return ;
     }
   }
-  delete m;
+  // delete m;
   std::cout << "Inventory is full" << std::endl;
   return ;
 }
 
 void Character::unequip(int idx)
 {
-  if (this->_inventory[idx] != NULL)
+  if (idx < 0 || idx > 3)
+      return ;
+  if (this->_inventory[idx])
   {
     for (size_t i = 0; i < 100; i++)
     {
@@ -122,11 +125,15 @@ void Character::unequip(int idx)
       {
         Character::voidBank[i] = this->_inventory[idx];
         this->_inventory[idx] = NULL;
+        std::cout << "Unequiped slot [" << idx << "]" << std::endl;
+        return ;
       }
     }
     std::cout << "voidBank is full" << std::endl;
     return ;
   }
+  std::cout << "Trying to unequip an empty slot" << std::endl;
+  return ;
 }
 
 void Character::use(int idx, ICharacter &target)
@@ -137,4 +144,13 @@ void Character::use(int idx, ICharacter &target)
     return ;
   }
   std::cout << "Trying to use an empty slot" << std::endl;
+}
+
+void Character::deleteVoidBank()
+{
+  for (size_t i = 0; i < 100; i++)
+  {
+    if (Character::voidBank[i] != NULL)
+      delete Character::voidBank[i];
+  }
 }

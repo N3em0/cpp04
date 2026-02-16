@@ -25,6 +25,8 @@ public :
   virtual void use(int idx, ICharacter &target);
 
   static AMateria *voidBank[100]; //static
+  
+  static void deleteVoidBank();
 };
 
 #endif

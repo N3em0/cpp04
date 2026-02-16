@@ -58,7 +58,8 @@ MateriaSource &MateriaSource::operator=(MateriaSource const &rhs)
 
 AMateria const *MateriaSource::getMateriaTemplate(size_t i) const
 {
-  if (i >= 0 && i < 4)
+  // if (i >= 0 && i < 4)
+  if (i < 4)
     return (this->_MateriaTemplates[i]);
   else
     return (NULL);
@@ -95,17 +96,27 @@ AMateria *MateriaSource::createMateria(std::string const &type)
   {
     for (size_t i = 0; i < 4; i++)
     {
-      if (type == this->_MateriaTemplates[i]->getType())
-        return (this->_MateriaTemplates[i]->clone());
+      if (this->_MateriaTemplates[i])
+      {
+        if (type == this->_MateriaTemplates[i]->getType())
+          return (this->_MateriaTemplates[i]->clone());
+      }
     }
+    std::cout << "Materia not learned yet : " << type << std::endl;
+    return (NULL);
   }
   else if (type == "ice")
   {
     for (size_t i = 0; i < 4; i++)
     {
-      if (type == this->_MateriaTemplates[i]->getType())
-        return (this->_MateriaTemplates[i]->clone());
+      if (this->_MateriaTemplates[i])
+      {
+        if (type == this->_MateriaTemplates[i]->getType())
+          return (this->_MateriaTemplates[i]->clone());
+      }
     }
+    std::cout << "Materia not learned yet : " << type << std::endl;
+    return (NULL);
   }
   std::cout << "Wrong Materia type : " << type << std::endl;
   return (NULL);
