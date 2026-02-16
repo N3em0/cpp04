@@ -1,4 +1,3 @@
-
 #ifndef MATERIASOURCE_HPP
 #define MATERIASOURCE_HPP
 
@@ -10,10 +9,11 @@ class Materia;
 
 class MateriaSource : public IMateriaSource
 {
-private :
+private:
   AMateria *_MateriaTemplates[4];
   int _oldest;
-public :
+
+public:
   MateriaSource();
   MateriaSource(MateriaSource const &src);
   ~MateriaSource();
