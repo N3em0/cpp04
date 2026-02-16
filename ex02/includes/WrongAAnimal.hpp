@@ -1,7 +1,7 @@
 #include <iostream>
 
-#ifndef WRONGANIMAL_HPP
-#define WRONGANIMAL_HPP
+#ifndef WRONGAANIMAL_HPP
+#define WRONGAANIMAL_HPP
 
 class WrongAAnimal
 {

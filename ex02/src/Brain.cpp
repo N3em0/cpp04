@@ -1,7 +1,7 @@
 #include "Brain.hpp"
 #include "AAnimal.hpp"
 
-Brain::Brain() : sharedptr(0)
+Brain::Brain() : ideas(), sharedptr(0)
 {
   for (size_t i = 0; i < 100; i++)
   {
@@ -10,7 +10,7 @@ Brain::Brain() : sharedptr(0)
   std::cout << "Brain default constructor called." << std::endl;
 }
 
-Brain::Brain(Brain const &src)
+Brain::Brain(Brain const &src) : ideas(), sharedptr(0)
 {
   if (this != &src)
   {

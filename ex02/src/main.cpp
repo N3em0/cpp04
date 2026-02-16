@@ -7,8 +7,10 @@
 
 int main()
 {
+  // const AAnimal *meta = new AAnimal();
+  const WrongAAnimal *etam = new WrongAAnimal();
   const AAnimal *array[100];
-  // const AAnimal abstract(void);
+  etam->makeSound();
   const WrongAAnimal abstract(void);
 
   for (size_t i = 0; i < 100; i++)
@@ -25,5 +27,6 @@ int main()
   }
   for (size_t i = 0; i < 100; i++)
     delete array[i];
+  delete etam;
   return 0;
 }
