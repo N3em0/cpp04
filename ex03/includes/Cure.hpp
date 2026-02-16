@@ -1,4 +1,3 @@
-
 #ifndef CURE_HPP
 #define CURE_HPP
 
@@ -15,7 +14,7 @@ public:
 
   Cure &operator=(const Cure &rhs);
 
-  virtual AMateria *clone() const; // Trying with different return type than parent
+  virtual AMateria *clone() const;
   virtual void use(ICharacter &target);
 };
 
