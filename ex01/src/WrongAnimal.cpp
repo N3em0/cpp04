@@ -24,10 +24,7 @@ WrongAnimal &WrongAnimal::operator=(WrongAnimal const &rhs)
   return (*this);
 }
 
-std::string WrongAnimal::getType() const
-{
-  return (this->type);
-}
+std::string WrongAnimal::getType() const { return (this->type); }
 
 void WrongAnimal::makeSound() const
 {

@@ -1,5 +1,5 @@
-#include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
+#include "WrongAnimal.hpp"
 
 WrongCat::WrongCat() : WrongAnimal(), _brain(new Brain)
 {
@@ -46,15 +46,9 @@ WrongCat &WrongCat::operator=(WrongCat const &rhs)
   return (*this);
 }
 
-std::string WrongCat::getType() const
-{
-  return (this->type);
-}
+std::string WrongCat::getType() const { return (this->type); }
 
-Brain *WrongCat::getBrain() const
-{
-  return (this->_brain);
-}
+Brain *WrongCat::getBrain() const { return (this->_brain); }
 
 void WrongCat::makeSound() const
 {
