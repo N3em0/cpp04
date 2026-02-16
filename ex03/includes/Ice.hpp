@@ -7,7 +7,6 @@ class ICharacter;
 
 class Ice : public AMateria
 {
-private:
 public:
   Ice();
   Ice(Ice const &src);

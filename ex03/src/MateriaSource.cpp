@@ -1,14 +1,13 @@
 #include "MateriaSource.hpp"
 #include "AMateria.hpp"
 
-//Check if possible to init array in list init
 MateriaSource::MateriaSource() : _MateriaTemplates(), _oldest(0)
 {
   // std::cout << "MateriaSource default constructor called." << std::endl;
 }
 
-//Check if possible to init array in list init
-MateriaSource::MateriaSource(MateriaSource const &src) : _oldest(0)
+MateriaSource::MateriaSource(MateriaSource const &src)
+    : _MateriaTemplates(), _oldest(0)
 {
   if (this != &src)
   {
@@ -19,10 +18,9 @@ MateriaSource::MateriaSource(MateriaSource const &src) : _oldest(0)
       if (src._MateriaTemplates[i])
         this->_MateriaTemplates[i] = src._MateriaTemplates[i]->clone();
       else
-         this->_MateriaTemplates[i] = NULL;
+        this->_MateriaTemplates[i] = NULL;
     }
   }
-
   // std::cout << "MateriaSource copy constructor called." << std::endl;
 }
 
@@ -38,28 +36,27 @@ MateriaSource::~MateriaSource()
 
 MateriaSource &MateriaSource::operator=(MateriaSource const &rhs)
 {
-  // if (&rhs)
-  // {
-    if (this != &rhs)
+  if (this != &rhs)
+  {
+    for (size_t i = 0; i < 4; i++)
     {
-      for (size_t i = 0; i < 4; i++)
+      if (this->_MateriaTemplates[i])
       {
-        if (this->_MateriaTemplates[i])
-          delete this->_MateriaTemplates[i];
-        if (rhs._MateriaTemplates[i])
-          this->_MateriaTemplates[i] = rhs._MateriaTemplates[i]->clone();
-        else
-          this->_MateriaTemplates[i] = NULL;
+        delete this->_MateriaTemplates[i];
+        this->_MateriaTemplates[i] = NULL;
       }
+      if (rhs._MateriaTemplates[i])
+        this->_MateriaTemplates[i] = rhs._MateriaTemplates[i]->clone();
+      else
+        this->_MateriaTemplates[i] = NULL;
     }
-  // }
+  }
   return (*this);
 }
 
 AMateria const *MateriaSource::getMateriaTemplate(size_t i) const
 {
-  // if (i >= 0 && i < 4)
-  if (i < 4)
+  if (i >= 0 && i < 4)
     return (this->_MateriaTemplates[i]);
   else
     return (NULL);
@@ -68,18 +65,18 @@ AMateria const *MateriaSource::getMateriaTemplate(size_t i) const
 void MateriaSource::learnMateria(AMateria *Materia)
 {
   if (Materia == NULL)
-    return ;
+    return;
   for (size_t i = 0; i < 4; i++)
   {
     if (this->_MateriaTemplates[i] == Materia)
     {
       std::cout << "Materia already learned" << std::endl;
-      return ;
+      return;
     }
     if (this->_MateriaTemplates[i] == NULL)
     {
       this->_MateriaTemplates[i] = Materia;
-      return ;
+      return;
     }
   }
   if (this->_oldest == 4)
@@ -87,7 +84,7 @@ void MateriaSource::learnMateria(AMateria *Materia)
   delete this->_MateriaTemplates[this->_oldest];
   this->_MateriaTemplates[this->_oldest] = Materia;
   this->_oldest++;
-  return ;
+  return;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
@@ -118,6 +115,6 @@ AMateria *MateriaSource::createMateria(std::string const &type)
     std::cout << "Materia not learned yet : " << type << std::endl;
     return (NULL);
   }
-  std::cout << "Wrong Materia type : " << type << std::endl;
+  std::cout << "Trying to learn wrong Materia type : " << type << std::endl;
   return (NULL);
 }

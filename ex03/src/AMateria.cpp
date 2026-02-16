@@ -1,4 +1,5 @@
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 AMateria::AMateria() : type("Default")
 {
@@ -28,10 +29,3 @@ AMateria &AMateria::operator=(AMateria const &rhs)
 }
 
 std::string const &AMateria::getType() const { return (this->type); }
-
-void AMateria::use(ICharacter &target)
-{
-  (void)target;
-  // to do
-  return;
-}
