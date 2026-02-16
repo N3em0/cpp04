@@ -8,7 +8,7 @@ Character::Character() : _name("Default"), _inventory()
   // std::cout << "Character default constructor called." << std::endl;
 }
 
-Character::Character(Character const &src) : _name(src._name)
+Character::Character(Character const &src) : _name(src._name), _inventory()
 {
   if (this != &src)
   {
@@ -19,7 +19,7 @@ Character::Character(Character const &src) : _name(src._name)
       if (src._inventory[i])
         this->_inventory[i] = src._inventory[i]->clone();
       else
-         this->_inventory[i] = NULL;
+        this->_inventory[i] = NULL;
     }
   }
   // std::cout << "Character copy constructor called." << std::endl;
@@ -27,7 +27,8 @@ Character::Character(Character const &src) : _name(src._name)
 
 Character::Character(std::string const &name) : _name(name), _inventory()
 {
-  // std::cout << "Character constructor with name parameter called." << std::endl;
+  // std::cout << "Character constructor with name parameter called." <<
+  // std::endl;
 }
 
 Character::~Character()
@@ -40,62 +41,51 @@ Character::~Character()
       this->_inventory[i] = NULL;
     }
   }
-  // for (size_t i = 0; i < 100; i++)
-  // {
-  //   if (Character::voidBank[i] != NULL)
-  //     delete Character::voidBank[i];
-  // }
   // std::cout << "Character destructor called." << std::endl;
 }
 
 Character &Character::operator=(Character const &rhs)
 {
-  // if (&rhs)
-  // {
-    if (this != &rhs)
+  if (this != &rhs)
+  {
+    this->_name = rhs._name;
+    for (size_t i = 0; i < 4; i++)
     {
-      this->_name = rhs._name;
-      for (size_t i = 0; i < 4; i++)
-      {
-        if (this->_inventory[i])
-          delete this->_inventory[i];
-        if (rhs._inventory[i])
-          this->_inventory[i] = rhs._inventory[i]->clone();
-        else
-          this->_inventory[i] = NULL;
-      }
+      if (this->_inventory[i])
+        delete this->_inventory[i];
+      if (rhs._inventory[i])
+        this->_inventory[i] = rhs._inventory[i]->clone();
+      else
+        this->_inventory[i] = NULL;
     }
-  // }
+  }
   return (*this);
 }
 
 AMateria const *Character::getInvMateria(size_t i) const
 {
-  // if (i >= 0 && i < 4)
-  if (i < 4)
+  if (i >= 0 && i < 4)
     return (this->_inventory[i]);
   else
     return (NULL);
 }
 
-std::string const &Character::getName() const
-{
-  return (this->_name);
-}
+std::string const &Character::getName() const { return (this->_name); }
 
 void Character::equip(AMateria *m)
 {
   if (m == NULL)
   {
-    std::cout << "Wrong Materia type or empty Materia" << std::endl;
-    return ;
+    std::cout << "Trying to equip a wrong Materia type or empty Materia"
+              << std::endl;
+    return;
   }
   for (size_t i = 0; i < 4; i++)
   {
     if (this->_inventory[i] == m)
     {
       std::cout << "Materia already equiped" << std::endl;
-      return ;
+      return;
     }
     if (this->_inventory[i] == NULL)
     {
@@ -105,18 +95,17 @@ void Character::equip(AMateria *m)
         if (m == Character::voidBank[i])
           Character::voidBank[i] = NULL;
       }
-      return ;
+      return;
     }
   }
-  // delete m;
   std::cout << "Inventory is full" << std::endl;
-  return ;
+  return;
 }
 
 void Character::unequip(int idx)
 {
   if (idx < 0 || idx > 3)
-      return ;
+    return;
   if (this->_inventory[idx])
   {
     for (size_t i = 0; i < 100; i++)
@@ -126,14 +115,14 @@ void Character::unequip(int idx)
         Character::voidBank[i] = this->_inventory[idx];
         this->_inventory[idx] = NULL;
         std::cout << "Unequiped slot [" << idx << "]" << std::endl;
-        return ;
+        return;
       }
     }
     std::cout << "voidBank is full" << std::endl;
-    return ;
+    return;
   }
   std::cout << "Trying to unequip an empty slot" << std::endl;
-  return ;
+  return;
 }
 
 void Character::use(int idx, ICharacter &target)
@@ -141,7 +130,7 @@ void Character::use(int idx, ICharacter &target)
   if (this->_inventory[idx] != NULL)
   {
     this->_inventory[idx]->use(target);
-    return ;
+    return;
   }
   std::cout << "Trying to use an empty slot" << std::endl;
 }
