@@ -3,21 +3,7 @@
 
 Floor::Floor() : _floor() {}
 
-Floor::Floor(Floor const &src) : _floor()
-{
-  if (this != &src)
-  {
-    for (size_t i = 0; i < 100; i++)
-    {
-      if (this->_floor[i])
-        delete this->_floor[i];
-      if (src._floor[i])
-        this->_floor[i] = src._floor[i]->clone();
-      else
-        this->_floor[i] = NULL;
-    }
-  }
-}
+Floor::Floor(Floor const &src) : _floor() { (void)src; }
 
 Floor::~Floor()
 {
