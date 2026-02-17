@@ -9,14 +9,15 @@ class Floor
 {
 private:
   AMateria *_floor[100];
-
-public:
   Floor();
   Floor(Floor const &src);
+  Floor &operator=(Floor const &rhs);
+  static Floor *_instance;
+
+public:
   ~Floor();
 
-  Floor &operator=(Floor const &rhs);
-
+  static Floor *getInstance();
   AMateria const *getFloorMateria(size_t i) const;
   bool dropMateria(AMateria *m);
   void equipFloorMateria(AMateria *m);
