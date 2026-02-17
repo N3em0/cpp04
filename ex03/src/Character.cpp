@@ -1,5 +1,6 @@
 #include "Character.hpp"
 #include "AMateria.hpp"
+#include <cstddef>
 
 AMateria *Character::voidBank[100] = {};
 
@@ -87,6 +88,9 @@ void Character::equip(AMateria *m)
       std::cout << "Materia already equiped" << std::endl;
       return;
     }
+  }
+  for (size_t i = 0; i < 4; i++)
+  {
     if (this->_inventory[i] == NULL)
     {
       this->_inventory[i] = m;

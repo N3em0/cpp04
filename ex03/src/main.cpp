@@ -78,12 +78,12 @@ int main()
   me->use(1, *bob);
   me->use(2, *bob);
   me->use(3, *me);
-  me->unequip(3);
+  me->unequip(1);
   me->equip(tmp);
-  me->use(1, *me);
-  me->unequip(3);
-  me->equip(tmp);
-  me->use(3, *me);
+  // me->use(1, *me);
+  // me->unequip(3);
+  // me->equip(tmp);
+  // me->use(3, *me);
   Character::deleteVoidBank();
   delete bob;
   delete me;
