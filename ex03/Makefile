@@ -10,7 +10,8 @@ AMateria.cpp \
 Cure.cpp \
 Ice.cpp \
 MateriaSource.cpp \
-Character.cpp
+Character.cpp \
+Floor.cpp
 
 SRC		:=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ			:=	$(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)

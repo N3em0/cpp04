@@ -1,15 +1,18 @@
 #include "Character.hpp"
 #include "AMateria.hpp"
+#include "Floor.hpp"
+#include <cmath>
 #include <cstddef>
 
-AMateria *Character::voidBank[100] = {};
+// AMateria *Character::voidBank[100] = {};
 
-Character::Character() : _name("Default"), _inventory()
+Character::Character() : _name("Default"), _inventory(), _floorPtr(NULL)
 {
   // std::cout << "Character default constructor called." << std::endl;
 }
 
-Character::Character(Character const &src) : _name(src._name), _inventory()
+Character::Character(Character const &src)
+    : _name(src._name), _inventory(), _floorPtr(NULL)
 {
   if (this != &src)
   {
@@ -22,11 +25,20 @@ Character::Character(Character const &src) : _name(src._name), _inventory()
       else
         this->_inventory[i] = NULL;
     }
+    this->_floorPtr = src._floorPtr;
   }
   // std::cout << "Character copy constructor called." << std::endl;
 }
 
-Character::Character(std::string const &name) : _name(name), _inventory()
+Character::Character(std::string const &name)
+    : _name(name), _inventory(), _floorPtr(NULL)
+{
+  // std::cout << "Character constructor with name parameter called." <<
+  // std::endl;
+}
+
+Character::Character(std::string const &name, Floor *floorPtr)
+    : _name(name), _inventory(), _floorPtr(floorPtr)
 {
   // std::cout << "Character constructor with name parameter called." <<
   // std::endl;
@@ -94,11 +106,8 @@ void Character::equip(AMateria *m)
     if (this->_inventory[i] == NULL)
     {
       this->_inventory[i] = m;
-      for (size_t i = 0; i < 100; i++)
-      {
-        if (m == Character::voidBank[i])
-          Character::voidBank[i] = NULL;
-      }
+      if (this->_floorPtr)
+        this->_floorPtr->equipFloorMateria(m);
       return;
     }
   }
@@ -110,22 +119,20 @@ void Character::unequip(int idx)
 {
   if (idx < 0 || idx > 3)
     return;
-  if (this->_inventory[idx])
+  if (this->_inventory[idx] == NULL)
   {
-    for (size_t i = 0; i < 100; i++)
-    {
-      if (Character::voidBank[i] == NULL)
-      {
-        Character::voidBank[i] = this->_inventory[idx];
-        this->_inventory[idx] = NULL;
-        std::cout << "Unequiped slot [" << idx << "]" << std::endl;
-        return;
-      }
-    }
-    std::cout << "voidBank is full" << std::endl;
+    std::cout << "Trying to unequip an empty slot" << std::endl;
     return;
   }
-  std::cout << "Trying to unequip an empty slot" << std::endl;
+  if (this->_floorPtr == NULL)
+  {
+    std::cout << "Can't unequip Materia. There is no floor" << std::endl;
+    return;
+  }
+  if (this->_floorPtr->dropMateria(this->_inventory[idx]) == false)
+    return;
+  this->_inventory[idx] = NULL;
+  std::cout << "Unequiped slot [" << idx << "]" << std::endl;
   return;
 }
 
@@ -139,11 +146,11 @@ void Character::use(int idx, ICharacter &target)
   std::cout << "Trying to use an empty slot" << std::endl;
 }
 
-void Character::deleteVoidBank()
-{
-  for (size_t i = 0; i < 100; i++)
-  {
-    if (Character::voidBank[i] != NULL)
-      delete Character::voidBank[i];
-  }
-}
+// void Character::deleteVoidBank()
+// {
+//   for (size_t i = 0; i < 100; i++)
+//   {
+//     if (Character::voidBank[i] != NULL)
+//       delete Character::voidBank[i];
+//   }
+// }
