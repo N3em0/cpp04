@@ -3,17 +3,21 @@
 
 #include "ICharacter.hpp"
 
+class Floor;
 class AMateria;
 
 class Character : public ICharacter
 {
-private :
+private:
   std::string _name;
   AMateria *_inventory[4];
-public :
+  Floor *_floorPtr;
+
+public:
   Character();
   Character(Character const &src);
   Character(std::string const &name);
+  Character(std::string const &name, Floor *floorPtr);
   ~Character();
 
   Character &operator=(Character const &rhs);
@@ -24,8 +28,8 @@ public :
   virtual void unequip(int idx);
   virtual void use(int idx, ICharacter &target);
 
-  static AMateria *voidBank[100]; //static
-  
+  // static AMateria *voidBank[100]; //static
+
   static void deleteVoidBank();
 };
 
