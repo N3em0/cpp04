@@ -4,8 +4,6 @@
 #include <cmath>
 #include <cstddef>
 
-// AMateria *Character::voidBank[100] = {};
-
 Character::Character() : _name("Default"), _inventory()
 {
   // std::cout << "Character default constructor called." << std::endl;
@@ -33,13 +31,6 @@ Character::Character(std::string const &name) : _name(name), _inventory()
   // std::cout << "Character constructor with name parameter called." <<
   // std::endl;
 }
-
-// Character::Character(std::string const &name, Floor *floorPtr)
-//     : _name(name), _inventory(), _floorPtr(floorPtr)
-// {
-//   // std::cout << "Character constructor with name parameter called." <<
-//   // std::endl;
-// }
 
 Character::~Character()
 {
@@ -146,12 +137,3 @@ void Character::use(int idx, ICharacter &target)
   }
   std::cout << "Trying to use an empty slot" << std::endl;
 }
-
-// void Character::deleteVoidBank()
-// {
-//   for (size_t i = 0; i < 100; i++)
-//   {
-//     if (Character::voidBank[i] != NULL)
-//       delete Character::voidBank[i];
-//   }
-// }
