@@ -38,6 +38,11 @@ bool Floor::dropMateria(AMateria *m)
     return (false);
   for (size_t i = 0; i < 10; i++)
   {
+    if (this->_floor[i] == m)
+      return (false);
+  }
+  for (size_t i = 0; i < 10; i++)
+  {
     if (this->_floor[i] == NULL)
     {
       this->_floor[i] = m;
