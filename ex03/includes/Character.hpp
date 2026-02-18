@@ -11,13 +11,13 @@ class Character : public ICharacter
 private:
   std::string _name;
   AMateria *_inventory[4];
-  Floor *_floorPtr;
+  // Floor *_floorPtr;
 
 public:
   Character();
   Character(Character const &src);
   Character(std::string const &name);
-  Character(std::string const &name, Floor *floorPtr);
+  // Character(std::string const &name, Floor *floorPtr);
   ~Character();
 
   Character &operator=(Character const &rhs);

@@ -95,26 +95,33 @@
 // }
 int main()
 {
-  Floor *floor = new Floor();
   IMateriaSource *src = new MateriaSource();
   src->learnMateria(new Ice());
   src->learnMateria(new Cure());
-  ICharacter *me = new Character("me", floor);
+  ICharacter *me = new Character("me");
+  ICharacter *bob = new Character("bob");
   AMateria *tmp;
-  tmp = src->createMateria("ice");
-  me->equip(tmp);
+  for (size_t i = 0; i < 15; i++)
+  {
+    tmp = src->createMateria("ice");
+    me->equip(tmp);
+    me->unequip(0);
+    bob->equip(tmp);
+    bob->use(i, *me);
+  }
   tmp = src->createMateria("cure");
   me->equip(tmp);
-  me->unequip(0);
-  ICharacter *bob = new Character("bob");
+  // me->unequip(0);
+  bob->equip(Floor::getInstance()->getFloorMateria(0));
   tmp = src->createMateria("cure");
   bob->equip(tmp);
-  bob->unequip(1);
+  // bob->unequip(1);
+  bob->use(0, *me);
   me->use(0, *bob);
   me->use(1, *bob);
   delete bob;
   delete me;
   delete src;
-  delete floor;
+  Floor::getInstance()->destroyInstance();
   return 0;
 }

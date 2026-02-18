@@ -11,7 +11,7 @@ class MateriaSource : public IMateriaSource
 {
 private:
   AMateria *_MateriaTemplates[4];
-  int _oldest;
+  size_t _oldest;
 
 public:
   MateriaSource();
