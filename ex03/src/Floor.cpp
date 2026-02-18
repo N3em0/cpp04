@@ -79,4 +79,8 @@ Floor *Floor::getInstance()
   return _instance;
 }
 
-void Floor::destroyInstance() { delete _instance; }
+void Floor::destroyInstance()
+{
+  delete _instance;
+  _instance = NULL;
+}
